@@ -1,0 +1,10 @@
+{
+  "operation": "reserve",
+  "method": "POST",
+  "path": "/reservations",
+  "request": {"sku": "existing string", "quantity": "positive integer", "request_id": "nonempty string"},
+  "response": {"code": "business code", "reservation_id": "string on OK, null otherwise"},
+  "business_codes": ["OK", "INVALID_QUANTITY", "INSUFFICIENT_STOCK", "IDEMPOTENCY_CONFLICT", "ITEM_NOT_FOUND"],
+  "transport": "JSON over HTTP; business responses use HTTP 200",
+  "version": "teaching-v1"
+}

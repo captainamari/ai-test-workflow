@@ -1,0 +1,254 @@
+{
+  "cases": [
+    {
+      "id": "C01",
+      "title": "库存充足时成功预留",
+      "rule_ids": [
+        "R02"
+      ],
+      "status": "ready",
+      "blocked_reason": "",
+      "initial_stock": 5,
+      "requests": [
+        {
+          "quantity": 2,
+          "key": "request"
+        }
+      ],
+      "expect": {
+        "codes": [
+          "OK"
+        ],
+        "remaining_stock": 3,
+        "reservation_count": 1,
+        "same_reservation": null
+      }
+    },
+    {
+      "id": "C02",
+      "title": "库存不足时拒绝且不产生副作用",
+      "rule_ids": [
+        "R02"
+      ],
+      "status": "ready",
+      "blocked_reason": "",
+      "initial_stock": 1,
+      "requests": [
+        {
+          "quantity": 2,
+          "key": "request"
+        }
+      ],
+      "expect": {
+        "codes": [
+          "INSUFFICIENT_STOCK"
+        ],
+        "remaining_stock": 1,
+        "reservation_count": 0,
+        "same_reservation": null
+      }
+    },
+    {
+      "id": "C03",
+      "title": "零数量被拒绝",
+      "rule_ids": [
+        "R01"
+      ],
+      "status": "ready",
+      "blocked_reason": "",
+      "initial_stock": 5,
+      "requests": [
+        {
+          "quantity": 0,
+          "key": "request"
+        }
+      ],
+      "expect": {
+        "codes": [
+          "INVALID_QUANTITY"
+        ],
+        "remaining_stock": 5,
+        "reservation_count": 0,
+        "same_reservation": null
+      }
+    },
+    {
+      "id": "C04",
+      "title": "相同请求重复提交复用原预留",
+      "rule_ids": [
+        "R03"
+      ],
+      "status": "ready",
+      "blocked_reason": "",
+      "initial_stock": 5,
+      "requests": [
+        {
+          "quantity": 2,
+          "key": "request"
+        },
+        {
+          "quantity": 2,
+          "key": "request"
+        }
+      ],
+      "expect": {
+        "codes": [
+          "OK",
+          "OK"
+        ],
+        "remaining_stock": 3,
+        "reservation_count": 1,
+        "same_reservation": true
+      }
+    },
+    {
+      "id": "C05",
+      "title": "同编号改变数量时拒绝且保留原记录",
+      "rule_ids": [
+        "R04"
+      ],
+      "status": "ready",
+      "blocked_reason": "",
+      "initial_stock": 5,
+      "requests": [
+        {
+          "quantity": 2,
+          "key": "request"
+        },
+        {
+          "quantity": 1,
+          "key": "request"
+        }
+      ],
+      "expect": {
+        "codes": [
+          "OK",
+          "IDEMPOTENCY_CONFLICT"
+        ],
+        "remaining_stock": 3,
+        "reservation_count": 1,
+        "same_reservation": null
+      }
+    },
+    {
+      "id": "C06",
+      "title": "库存等于申请数量时成功",
+      "rule_ids": [
+        "R02"
+      ],
+      "status": "ready",
+      "blocked_reason": "",
+      "initial_stock": 2,
+      "requests": [
+        {
+          "quantity": 2,
+          "key": "request"
+        }
+      ],
+      "expect": {
+        "codes": [
+          "OK"
+        ],
+        "remaining_stock": 0,
+        "reservation_count": 1,
+        "same_reservation": null
+      }
+    },
+    {
+      "id": "C07",
+      "title": "负数数量被拒绝",
+      "rule_ids": [
+        "R01"
+      ],
+      "status": "ready",
+      "blocked_reason": "",
+      "initial_stock": 5,
+      "requests": [
+        {
+          "quantity": -1,
+          "key": "request"
+        }
+      ],
+      "expect": {
+        "codes": [
+          "INVALID_QUANTITY"
+        ],
+        "remaining_stock": 5,
+        "reservation_count": 0,
+        "same_reservation": null
+      }
+    },
+    {
+      "id": "C08",
+      "title": "布尔数量被拒绝",
+      "rule_ids": [
+        "R01"
+      ],
+      "status": "ready",
+      "blocked_reason": "",
+      "initial_stock": 5,
+      "requests": [
+        {
+          "quantity": true,
+          "key": "request"
+        }
+      ],
+      "expect": {
+        "codes": [
+          "INVALID_QUANTITY"
+        ],
+        "remaining_stock": 5,
+        "reservation_count": 0,
+        "same_reservation": null
+      }
+    },
+    {
+      "id": "C09",
+      "title": "小数数量被拒绝",
+      "rule_ids": [
+        "R01"
+      ],
+      "status": "ready",
+      "blocked_reason": "",
+      "initial_stock": 5,
+      "requests": [
+        {
+          "quantity": 1.5,
+          "key": "request"
+        }
+      ],
+      "expect": {
+        "codes": [
+          "INVALID_QUANTITY"
+        ],
+        "remaining_stock": 5,
+        "reservation_count": 0,
+        "same_reservation": null
+      }
+    },
+    {
+      "id": "C10",
+      "title": "字符串数量不被 SDK 转成整数",
+      "rule_ids": [
+        "R01"
+      ],
+      "status": "ready",
+      "blocked_reason": "",
+      "initial_stock": 5,
+      "requests": [
+        {
+          "quantity": "2",
+          "key": "request"
+        }
+      ],
+      "expect": {
+        "codes": [
+          "INVALID_QUANTITY"
+        ],
+        "remaining_stock": 5,
+        "reservation_count": 0,
+        "same_reservation": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "rules": [
+    {
+      "id": "R01",
+      "statement": "数量必须是大于零的整数；零、负数、小数、布尔值和字符串均返回 INVALID_QUANTITY，且不改变库存、不创建预留记录。",
+      "source": {
+        "file": "requirements.md",
+        "quote": "数量必须是大于零的整数；零、负数、小数、布尔值和字符串均返回 INVALID_QUANTITY，且不改变库存、不创建预留记录。"
+      }
+    },
+    {
+      "id": "R02",
+      "statement": "库存大于或等于申请数量时，返回 OK，扣减申请数量并创建一条预留记录；库存小于申请数量时，返回 INSUFFICIENT_STOCK，库存不变且不创建预留记录。",
+      "source": {
+        "file": "requirements.md",
+        "quote": "库存大于或等于申请数量时，返回 OK，扣减申请数量并创建一条预留记录；库存小于申请数量时，返回 INSUFFICIENT_STOCK，库存不变且不创建预留记录。"
+      }
+    },
+    {
+      "id": "R03",
+      "statement": "相同请求编号和相同商品、数量重复提交时，返回同一预留编号，不重复扣减库存，也不增加预留记录。",
+      "source": {
+        "file": "requirements.md",
+        "quote": "相同请求编号和相同商品、数量重复提交时，返回同一预留编号，不重复扣减库存，也不增加预留记录。"
+      }
+    },
+    {
+      "id": "R04",
+      "statement": "相同请求编号携带不同商品或数量时，返回 IDEMPOTENCY_CONFLICT，保留原预留记录与原库存结果。",
+      "source": {
+        "file": "requirements.md",
+        "quote": "相同请求编号携带不同商品或数量时，返回 IDEMPOTENCY_CONFLICT，保留原预留记录与原库存结果。"
+      }
+    }
+  ],
+  "open_questions": []
+}

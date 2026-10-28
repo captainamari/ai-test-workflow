@@ -1,0 +1,7 @@
+{
+  "create_item": {"available": true, "method": "InventoryAPI.create_item(stock)", "purpose": "create isolated test item"},
+  "reserve_raw": {"available": true, "method": "InventoryAPI.reserve(sku, quantity, request_id)", "purpose": "preserve invalid quantity values"},
+  "read_stock": {"available": true, "method": "InventoryAPI.stock(sku)", "purpose": "read current stock"},
+  "count_reservations": {"available": true, "method": "InventoryAPI.reservation_count(sku)", "purpose": "observe records, including unwanted side effects"},
+  "delete_item": {"available": true, "method": "InventoryAPI.delete_item(sku)", "purpose": "delete item and its reservations"}
+}
